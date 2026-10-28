@@ -43,3 +43,5 @@ Each route is emitted as `route/index.html`, so direct URLs and refreshes work o
 Upload `dist/` to any static host (Netlify, Cloudflare Pages, Vercel, GitHub Pages, S3) and point
 the domain at it. Configure the host to serve `404.html` for unknown paths (Netlify and Cloudflare
 Pages do this automatically).
+
+Vercel uses `vercel.json` to publish the generated `dist/` directory after running the build.
