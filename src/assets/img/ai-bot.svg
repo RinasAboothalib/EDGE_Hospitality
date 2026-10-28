@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Animated EDGE "AI concierge" bot used as the chat launcher icon -->
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2d27d"/>
+      <stop offset="0.55" stop-color="#d8a53d"/>
+      <stop offset="1" stop-color="#a97a22"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f2d27d" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#f2d27d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <style>
+    .bob { animation: bob 3.2s ease-in-out infinite; transform-origin: 32px 34px; }
+    .eye { animation: blink 4.6s infinite; transform-box: fill-box; transform-origin: center; }
+    .beacon { animation: beacon 1.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .halo { animation: halo 1.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .wave { animation: talk 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    @keyframes bob { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-2px) rotate(-3deg); } }
+    @keyframes blink { 0%, 44%, 50%, 100% { transform: scaleY(1); } 47% { transform: scaleY(0.1); } }
+    @keyframes beacon { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+    @keyframes halo { 0%, 100% { transform: scale(0.6); opacity: 0.2; } 50% { transform: scale(1.25); opacity: 0.9; } }
+    @keyframes talk { 0%, 60%, 100% { transform: scaleY(0.4); } 30% { transform: scaleY(1); } }
+  </style>
+  <g class="bob">
+    <!-- antenna -->
+    <line x1="32" y1="10" x2="32" y2="17" stroke="#d8a53d" stroke-width="2.4" stroke-linecap="round"/>
+    <circle class="halo" cx="32" cy="8" r="6" fill="url(#glow)"/>
+    <circle class="beacon" cx="32" cy="8" r="3" fill="#f2d27d"/>
+    <!-- ears -->
+    <rect x="9" y="28" width="5" height="12" rx="2.5" fill="url(#gold)"/>
+    <rect x="50" y="28" width="5" height="12" rx="2.5" fill="url(#gold)"/>
+    <!-- head -->
+    <rect x="13" y="17" width="38" height="32" rx="11" fill="#141414" stroke="url(#gold)" stroke-width="2.6"/>
+    <!-- visor -->
+    <rect x="18" y="23" width="28" height="15" rx="7.5" fill="#050505"/>
+    <!-- eyes -->
+    <circle class="eye" cx="26" cy="30.5" r="3.2" fill="#f2d27d"/>
+    <circle class="eye" cx="38" cy="30.5" r="3.2" fill="#f2d27d"/>
+    <!-- voice bars -->
+    <rect class="wave" x="27" y="41" width="2.2" height="5" rx="1.1" fill="#d8a53d"/>
+    <rect class="wave" style="animation-delay:.15s" x="30.9" y="40" width="2.2" height="7" rx="1.1" fill="#f2d27d"/>
+    <rect class="wave" style="animation-delay:.3s" x="34.8" y="41" width="2.2" height="5" rx="1.1" fill="#d8a53d"/>
+  </g>
+</svg>

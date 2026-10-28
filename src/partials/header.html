@@ -1,0 +1,38 @@
+<div class="page-curtain" aria-hidden="true">
+  <div class="page-curtain__cols"><span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span><span style="--i:4"></span></div>
+  <div class="page-curtain__mark">
+    <picture><source srcset="/assets/img/edge-logo-tight.webp" type="image/webp"><img class="page-curtain__logo" src="/assets/img/edge-logo-tight.png" alt="" width="887" height="326" decoding="async"></picture>
+    <span class="page-curtain__bar"></span>
+  </div>
+</div>
+<div class="scroll-progress" aria-hidden="true" data-scroll-progress></div>
+<div class="grain" aria-hidden="true"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a class="wordmark" href="/" aria-label="EDGE Hospitality — Home">
+      <picture><source srcset="/assets/img/edge-logo-tight.webp" type="image/webp"><img class="wordmark__img" src="/assets/img/edge-logo-tight.png" alt="" width="887" height="326" fetchpriority="high"></picture>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <ul class="site-nav__list">
+          {{navLinks}}
+      </ul>
+    </nav>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+      <span class="menu-toggle__bars" aria-hidden="true"><span></span><span></span></span>
+      <span class="visually-hidden">Menu</span>
+    </button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+  <nav class="mobile-menu__nav" aria-label="Mobile">
+    <ul>
+      <li><a href="/">Home</a></li>
+          {{navLinks}}
+    </ul>
+  </nav>
+  <div class="mobile-menu__foot">
+    <a href="mailto:hello@edgehospitalitygroups.com">hello@edgehospitalitygroups.com</a>
+    <p>Efficiency · Discipline · Growth Mindset · Execution</p>
+  </div>
+</div>

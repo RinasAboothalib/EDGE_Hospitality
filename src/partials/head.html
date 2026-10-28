@@ -1,0 +1,43 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<meta name="author" content="Edge Hospitality">
+<meta name="keywords" content="hospitality consulting Sri Lanka, hotel property management, hotel sales training, PMS CRM systems hotel, mystery audit hotel, hotel review management AI, Level-Up hospitality training, Edge Hospitality">
+<meta name="theme-color" content="#080808">
+<link rel="canonical" href="{{canonical}}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EDGE Hospitality">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:url" content="{{canonical}}">
+<meta property="og:image" content="{{ogImage}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ogImage}}">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="/assets/css/main.css?v={{version}}">
+<script>
+  (function (d) {
+    d.classList.add('js');
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Arriving from an in-site link: start covered by the transition curtain (see main.js)
+    try {
+      if (sessionStorage.getItem('edge-transition')) {
+        sessionStorage.removeItem('edge-transition');
+        if (!reduce) d.classList.add('is-arriving');
+      }
+    } catch (e) {}
+    // Failsafe: if the site script fails to run, show everything anyway
+    setTimeout(function () {
+      if (!d.classList.contains('is-ready')) d.classList.add('is-ready', 'intro-failsafe');
+    }, 6000);
+  })(document.documentElement);
+</script>
+{{headExtra}}
