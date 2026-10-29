@@ -14,6 +14,88 @@
   window.dispatchEvent(new Event('edge:ready'));
   markReady();
 
+  /* ---------- Home hero: gold dust ----------
+     Depth-layered motes rise slowly and twinkle (nearer = larger, brighter, faster) over a few
+     faint drifting bokeh discs. Sprites are pre-rendered; the loop pauses off-screen or in a
+     hidden tab, and reduced motion gets a single still frame. */
+  const dust = document.querySelector('[data-hero-dust]');
+  if (dust) {
+    const ctx = dust.getContext('2d');
+    const sprite = (r, stops) => {
+      const c = document.createElement('canvas');
+      c.width = c.height = r * 2;
+      const g = c.getContext('2d');
+      const grad = g.createRadialGradient(r, r, 0, r, r, r);
+      stops.forEach(([o, col]) => grad.addColorStop(o, col));
+      g.fillStyle = grad;
+      g.fillRect(0, 0, r * 2, r * 2);
+      return c;
+    };
+    const MOTE = sprite(32, [[0, 'rgba(255,246,220,1)'], [0.18, 'rgba(242,210,125,0.9)'], [0.45, 'rgba(216,165,61,0.28)'], [1, 'rgba(216,165,61,0)']]);
+    const BOKEH = sprite(128, [[0, 'rgba(216,165,61,0.55)'], [0.6, 'rgba(216,165,61,0.18)'], [1, 'rgba(216,165,61,0)']]);
+    let w = 0, h = 0, motes = [], discs = [], running = false, visible = true, last = 0;
+    const rand = (a, b) => a + Math.random() * (b - a);
+    const mote = (y) => {
+      const z = Math.pow(Math.random(), 1.6); // most motes far away, a few close
+      return { x: rand(0, w), y: y ?? rand(0, h), z, phase: rand(0, 6.28), tw: rand(0.6, 1.8), sway: rand(8, 26) * (0.4 + z) };
+    };
+    const resize = () => {
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      w = dust.clientWidth;
+      h = dust.clientHeight;
+      dust.width = Math.round(w * dpr);
+      dust.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.round(Math.min(170, Math.max(50, (w * h) / 8000)));
+      motes = Array.from({ length: count }, () => mote());
+      discs = Array.from({ length: w < 700 ? 4 : 7 }, () => ({ x: rand(0, w), y: rand(0, h), r: rand(60, 160), a: rand(0.05, 0.12), vx: rand(-6, 6), vy: rand(-8, -3), phase: rand(0, 6.28) }));
+    };
+    const draw = (t, dt) => {
+      ctx.clearRect(0, 0, w, h);
+      ctx.globalCompositeOperation = 'lighter';
+      for (const d of discs) {
+        d.x += d.vx * dt; d.y += d.vy * dt;
+        if (d.y < -d.r) { d.y = h + d.r; d.x = rand(0, w); }
+        if (d.x < -d.r) d.x = w + d.r; else if (d.x > w + d.r) d.x = -d.r;
+        ctx.globalAlpha = d.a * (0.75 + 0.25 * Math.sin(t * 0.0004 + d.phase));
+        ctx.drawImage(BOKEH, d.x - d.r, d.y - d.r, d.r * 2, d.r * 2);
+      }
+      for (const m of motes) {
+        m.y -= (6 + m.z * 34) * dt;
+        if (m.y < -20) Object.assign(m, mote(h + 20));
+        const x = m.x + Math.sin(t * 0.00035 * m.tw + m.phase) * m.sway;
+        const size = 3 + m.z * 13;
+        ctx.globalAlpha = (0.18 + m.z * 0.7) * (0.55 + 0.45 * Math.sin(t * 0.0016 * m.tw + m.phase));
+        ctx.drawImage(MOTE, x - size / 2, m.y - size / 2, size, size);
+      }
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = 'source-over';
+    };
+    const loop = (t) => {
+      if (!running) return;
+      const dt = Math.min(0.05, (t - (last || t)) / 1000);
+      last = t;
+      draw(t, dt);
+      requestAnimationFrame(loop);
+    };
+    const update = () => {
+      const should = visible && !document.hidden && !reduceMotion.matches;
+      if (should && !running) { running = true; last = 0; requestAnimationFrame(loop); }
+      else if (!should) running = false;
+    };
+    resize();
+    draw(performance.now(), 0); // first frame (and the only one for reduced motion)
+    dust.classList.add('is-on');
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; update(); }).observe(dust);
+    document.addEventListener('visibilitychange', update);
+    reduceMotion.addEventListener('change', update);
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => { resize(); if (!running) draw(performance.now(), 0); }, 150);
+    });
+  }
+
   /* ---------- Header state + reading progress ----------
      Past 24px the header condenses into a floating capsule; it slides away while scrolling
      down and returns on any scroll up. The gold hairline tracks reading progress. */

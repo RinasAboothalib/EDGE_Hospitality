@@ -784,60 +784,15 @@ html.lenis, html.lenis body { height: auto; }
   background: var(--bg);
   overflow: hidden;
 }
-/* Slow "fly-through" zoom: a dot field that keeps zooming in (two crossfading layers make it
-   endless) and thin gold frames that grow out of the centre and fade. Transform/opacity only. */
-.hero__field, .hero__frames { position: absolute; inset: 0; pointer-events: none; }
-.hero__field {
-  -webkit-mask: radial-gradient(ellipse 70% 65% at 50% 50%, #000 20%, transparent 75%);
-  mask: radial-gradient(ellipse 70% 65% at 50% 50%, #000 20%, transparent 75%);
-}
-.hero__field span {
-  position: absolute; inset: -10%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.22) 1px, transparent 1.6px) center / 38px 38px;
-  opacity: 0;
-  animation: field-zoom 24s linear infinite;
-  will-change: transform, opacity;
-}
-.hero__field span:nth-child(2) { animation-delay: -12s; }
-@keyframes field-zoom {
-  0% { transform: scale(0.6); opacity: 0; }
-  25% { opacity: 0.9; }
-  75% { opacity: 0.9; }
-  100% { transform: scale(1.8); opacity: 0; }
-}
-.hero__frames { display: grid; place-items: center; }
-.hero__frames span {
-  grid-area: 1 / 1;
-  width: min(62vw, 820px);
-  aspect-ratio: 16 / 9;
-  border: 1px solid rgba(216, 165, 61, 0.55);
-  border-radius: 36px;
-  opacity: 0;
-  animation: frame-zoom 15s cubic-bezier(0.45, 0, 0.75, 1) infinite;
-  animation-delay: calc(var(--i) * -3s);
-  will-change: transform, opacity;
-}
-@keyframes frame-zoom {
-  0% { transform: scale(0.12); opacity: 0; }
-  30% { opacity: 0.32; }
-  70% { opacity: 0.2; }
-  100% { transform: scale(2.1); opacity: 0; }
-}
+/* Gold dust: depth-layered particles rising slowly, with faint bokeh behind (canvas, main.js) */
+.hero__dust { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 1.6s var(--ease-out); }
+.hero__dust.is-on { opacity: 1; }
 /* keep the logo and headline crisp over the motion */
 .hero__bg::after {
   content: '';
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse 42% 34% at 50% 50%, rgba(8, 8, 8, 0.9), transparent 75%),
+  background: radial-gradient(ellipse 40% 32% at 50% 48%, rgba(8, 8, 8, 0.75), transparent 75%),
     radial-gradient(ellipse 100% 80% at 50% 50%, transparent 55%, var(--bg) 100%);
-}
-@media (max-width: 700px) {
-  .hero__frames span { width: 88vw; aspect-ratio: 4 / 5; border-radius: 28px; }
-  .hero__field span { background-size: 30px 30px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero__field span, .hero__frames span { animation: none; }
-  .hero__field span:first-child { opacity: 0.6; transform: none; }
-  .hero__frames span { opacity: 0.12; transform: scale(calc(0.5 + var(--i) * 0.3)); }
 }
 .hero__inner { display: grid; justify-items: center; gap: 22px; max-width: 1000px; }
 .hero__logo { position: relative; display: block; width: min(460px, 78vw); }
@@ -1284,7 +1239,7 @@ html.lenis, html.lenis body { height: auto; }
    Home: roadmap — a winding gold road drawn by scroll; an orb travels it and
    each milestone ignites as it is reached (main.js drives --p and .is-reached)
    ========================================================================== */
-.road { position: relative; height: 300px; margin: 110px 0 120px; }
+.road { position: relative; height: 300px; margin: 20px 0 120px; }
 .road__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .road__svg path { fill: none; stroke-linecap: round; }
 .road__base { stroke: rgba(255, 255, 255, 0.16); stroke-width: 2; stroke-dasharray: 0.004 0.01; }
