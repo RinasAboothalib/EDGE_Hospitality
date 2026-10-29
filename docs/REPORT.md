@@ -30,6 +30,9 @@ All original copy, names, titles, bios, email, website and address are preserved
 
 ## Animations & transitions implemented
 
+**Latest revisions (9):**
+- Home hero background: a slow "fly-through" zoom. Thin gold rounded frames (16:9 on desktop, 4:5 on phones) grow from the centre and fade every ~3 s over a faint dot field that keeps zooming in (two crossfading layers make it endless). A soft dark centre keeps the logo and headline crisp. CSS only, transform/opacity (no JS, no scroll cost); reduced motion shows a still, faint version.
+
 **Latest revisions (8):**
 - The intro loading screen (logo, counter, progress bar) is removed entirely: markup, head-script logic, main.js counter and its CSS. Every visit, refresh and back/forward opens straight on the page, with the hero and header animations starting immediately. The page-change curtain between pages is kept. nav-test updated to assert no loader on fresh visits and refreshes (56/56).
 
