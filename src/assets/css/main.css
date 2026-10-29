@@ -582,6 +582,10 @@ main:focus { outline: none; }
   font-size: 0.8rem;
   color: var(--muted-2);
 }
+.site-footer__credit { display: inline-flex; align-items: baseline; gap: 5px; }
+.site-footer__credit picture { display: inline-block; line-height: 0; }
+/* sized to the surrounding text: the logo's letters match the 0.8rem copy */
+.site-footer__credit img { display: block; width: auto; height: 1.05em; transform: translateY(0.12em); }
 @media (max-width: 860px) {
   .site-footer__top { grid-template-columns: 1fr 1fr; }
   .site-footer__brand { grid-column: 1 / -1; }
