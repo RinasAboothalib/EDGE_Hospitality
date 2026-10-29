@@ -30,6 +30,9 @@ All original copy, names, titles, bios, email, website and address are preserved
 
 ## Animations & transitions implemented
 
+**Latest revisions (11):**
+- Home hero words: the headline now enters word by word (130 ms apart), each word flipping up out of the dark (rotateX + blur to sharp); the subtitle follows word by word with a softer blur-rise. A slow light sweeps across the gold "Owners" about every 7 s. Words are restored to the original markup afterwards; reduced motion shows the text at once with no shine. `data-word-step` sets the per-word stagger for any `[data-words]` element.
+
 **Latest revisions (10):**
 - Home hero background replaced (the zooming frames are gone): rising gold dust on a canvas. Depth-layered motes (nearer = larger, brighter, faster) drift upward with a gentle sway and soft twinkle, over a few faint drifting gold bokeh discs. Count scales with screen size (50–170). It pauses when the hero is off-screen or the tab is hidden; reduced motion shows one still frame.
 - The home roadmap's heading block ("Our Approach / No Cookie-Cutter Solutions" and its lead line) is removed; the section keeps an accessible label.

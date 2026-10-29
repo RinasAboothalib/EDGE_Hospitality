@@ -448,10 +448,10 @@
       el.append(span);
       spans.push(span);
     });
-    const step = 0.035;
+    const step = (parseFloat(el.dataset.wordStep) || 35) / 1000;
     const delay = (parseFloat(el.dataset.delay) || 0) / 1000;
     spans.forEach((s, i) => s.style.setProperty('--d', `${(delay + i * step).toFixed(3)}s`));
-    return delay + spans.length * step + 0.75;
+    return delay + spans.length * step + 1.2;
   }
 
   function splitLines(el) {
